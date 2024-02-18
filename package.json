@@ -1,0 +1,31 @@
+{
+  "name": "fastapi_labo",
+  "version": "1.0.0",
+  "description": "fastapi_labo",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "webpack --mode production",
+    "eject": "react-scripts eject",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoshidaYuhei/fastapi_labo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YoshidaYuhei/fastapi_labo/issues"
+  },
+  "homepage": "https://github.com/YoshidaYuhei/fastapi_labo#readme",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.90.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

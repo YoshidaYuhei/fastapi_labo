@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: fast/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fast:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --reload
+
+  react:
+    build:
+      context: .
+      dockerfile: react-app/Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - ./react-app:/app
+      - /react-app/node_modules
