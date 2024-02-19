@@ -1,21 +1,38 @@
 version: '3.8'
 services:
   fastapi:
-    build:
-      context: .
-      dockerfile: fast/Dockerfile
+    build: ./fast/.
     ports:
       - "8000:8000"
-    volumes:
-      - ./fast:/app
-    command: uvicorn app.main:app --host 0.0.0.0 --reload
-
-  react:
-    build:
-      context: .
-      dockerfile: react-app/Dockerfile
+    env_file:
+      - fast/app/.env
+    depends_on:
+      - db
+    networks:
+      - backend
+  db:
+    image: mysql:5.7
+    command: --explicit_defaults_for_timestamp=1 
     ports:
-      - "3000:80"
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: dev
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     volumes:
-      - ./react-app:/app
-      - /react-app/node_modules
+      - db-data:/var/lib/mysql
+    networks:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  default:
+    external:
+      name: bridge
+  backend:
+    name: backend
+    driver: bridge
+    external: true

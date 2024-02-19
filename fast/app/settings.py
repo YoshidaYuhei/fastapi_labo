@@ -18,7 +18,5 @@ DB_PORT = os.getenv('DB_PORT', 'develop')
 TEST_DB_HOST = os.getenv('TEST_DB_HOST')
 DB_SQL_DEBUG = os.getenv('DB_SQL_DEBUG') == '1'
 
-DB_URL = f"mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8"
-# DB_URL = os.getenv('DATABASE_URL')
-print(DB_URL)
+DB_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8"
 TEST_DB_URL = f"mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}_test?charset=utf8"
