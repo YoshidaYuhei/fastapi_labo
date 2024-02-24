@@ -3,28 +3,27 @@ from fastapi import APIRouter, Response, Depends, status
 from query_service.ticket import search
 from sqlalchemy.orm import Session
 from depends import get_db
-import dto
+from dto import TicketRequest, TicketResponse
 
 router = APIRouter()
 
-@router.get("/",response_model=List[dto.TicketResponse])
+@router.get("/",response_model=List[TicketResponse])
 async def show(db: Session = Depends(get_db)):
     response = search(db)
     return response
 
-fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
 @router.get("/{ticket_id}/")
-async def pick(item_id: str, needy: str):
-    return {"item_id": item_id, "needy": needy}
-
+async def pick(request: TicketRequest):
+    return request
 
 @router.put("/{ticket_id}")
-async def update(ticket_id):
-    return Response(status_code=status.HTTP_200_OK)
+async def update(ticket_id: int, request: TicketRequest):
+    return { "ticket_id": ticket_id, **request.model_dump() }
 
 @router.post("/")
-async def create():
-    return Response(status_code=status.HTTP_200_OK)
+async def create(request: TicketRequest):
+    dic = request.model_dump()
+    return dic
 
 @router.delete("/{ticket_id}/")
 async def delete(ticket_id):

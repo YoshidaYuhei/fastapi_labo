@@ -1,16 +1,16 @@
+from typing import Union
 import datetime
-from fastapi import FastAPI
-from pydantic import BaseModel
 
 from dto.abstract import BaseDto
 
 class TicketRequest(BaseDto):
     id: int
+    description: Union[str, None] = None
 
 class TicketResponse(BaseDto):
     id: int
     title: str
-    description: str
+    description: Union[str, None] = None
     user_id: int
     price: int
     slot: float
