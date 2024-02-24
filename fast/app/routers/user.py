@@ -1,24 +1,20 @@
-from fastapi import APIRouter
-from fastapi import Response
-from fastapi import status
+from fastapi import APIRouter, Response, status
 
-from entity import UserIn
-from entity import UserOut
+from entity import UserRequest
 
 router = APIRouter()
 
 
-@router.get("/user/profile", response_model=UserOut)
-async def get_profile(email: str, password: str):
-  user = {
-      "id": 1,
-      "name": "John Doe",
-      "email": "email",
-      "password": "password"
-  }
-  entity = UserOut(**user)
-  return entity
+# @router.get("/profile", response_model=UserOut)
+# async def get_profile(email: str, password: str):
+#   user = {
+#       "id": 1,
+#       "name": "John Doe",
+#       "email": "email",
+#       "password": "password"
+#   }
+#   return entity
 
-@router.put("/user/profile", response_model=UserIn)
-async def update_profle():
-    return Response(status_code=status.HTTP_200_OK)
+# @router.put("/profile", response_model=)
+# async def update_profle():
+#     return Response(status_code=status.HTTP_200_OK)

@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class UserOut(BaseModel):
+class UserRequest(BaseModel):
     id: int
     name: str
     email: str

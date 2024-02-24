@@ -1,9 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import system
-from routers import auth
-from routers import user
+from routers import system, auth, user, ticket
+
 app = FastAPI()
 
 origins = [
@@ -18,13 +17,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int):
-    return {"item_id": item_id}
-
 ############################################################
 # Routers
 ############################################################
 app.include_router(system.router, tags=["システム"], prefix='/system')
 app.include_router(auth.router, tags=["認証"], prefix='/auth')
 app.include_router(user.router, tags=["ユーザー"], prefix='/user')
+app.include_router(ticket.router, tags=["チケット"], prefix='/ticket')
