@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from fastapi import APIRouter, Response, Depends, status
 from query_service.ticket import search
 from sqlalchemy.orm import Session
@@ -12,9 +12,11 @@ async def show(db: Session = Depends(get_db)):
     response = search(db)
     return response
 
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
 @router.get("/{ticket_id}/")
-async def pick(ticket_id: int):
-    return {"ticket_id": ticket_id}
+async def pick(item_id: str, needy: str):
+    return {"item_id": item_id, "needy": needy}
+
 
 @router.put("/{ticket_id}")
 async def update(ticket_id):
