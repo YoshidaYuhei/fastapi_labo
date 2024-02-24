@@ -13,7 +13,7 @@ async def show(db: Session = Depends(get_db)):
     return response
 
 @router.get("/{ticket_id}/")
-async def pick(ticket_id):
+async def pick(ticket_id: int):
     return {"ticket_id": ticket_id}
 
 @router.put("/{ticket_id}")
