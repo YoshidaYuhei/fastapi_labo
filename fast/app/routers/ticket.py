@@ -13,13 +13,13 @@ async def show(db: Session = Depends(get_db)):
     return response
 
 @router.get("/{ticket_id}/")
-async def pick(ticket_id: int, ticket: TicketRequest = Depends(TicketRequest.query_extractor)):
+async def pick(ticket_id: int, ticket: TicketRequest):
     query_items = { "q": ticket }
     return query_items
 
 @router.put("/{ticket_id}")
 async def update(ticket_id: int, request: TicketRequest):
-    return { "ticket_id": ticket_id, **request.model_dump() }
+    return { "ticket_id": ticket_id, "request": request}
 
 @router.post("/")
 async def create(request: TicketRequest):

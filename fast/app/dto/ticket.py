@@ -17,11 +17,17 @@ class TicketRequest(BaseDto):
     description: Union[str, None] = Field(
         default=None, title="The description of the ticket", max_length=300
     )
-    price: float = Field(gt=0, description="The price must be greater than zero")
+    price: float = Field(gt=0, examples=[200, 100], description="The price must be greater than zero")
     # options: Union[list[TicketOption], None] = None
     
-    def query_extractor(self, id: int = Query(None), description: str = Query(None), price: float = Query(None)):
-        return TicketRequest(id=id, description=description, price=price)
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "id": 1,
+                "description": "This is a ticket",
+            }
+        }
+    }
 
 class TicketResponse(BaseDto):
     id: int
