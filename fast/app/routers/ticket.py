@@ -13,11 +13,8 @@ async def show(db: Session = Depends(get_db)):
     return response
 
 @router.get("/{ticket_id}/")
-async def pick(
-    ticket_id: Annotated[int, Path(title="The ID of the item to get")],
-    q: Annotated[list[str], Query()] = ["foo", "bar"]
-    ):
-    query_items = { "q": q }
+async def pick(ticket_id: int, ticket: TicketRequest = Depends(TicketRequest.query_extractor)):
+    query_items = { "q": ticket }
     return query_items
 
 @router.put("/{ticket_id}")
