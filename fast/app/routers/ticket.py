@@ -1,9 +1,10 @@
-from typing import Annotated, List, Union
-from fastapi import APIRouter, Path, Query, Response, Depends, status
+from typing import Annotated, Any, List, Union
+from MySQLdb import Time
+from fastapi import APIRouter, Path, Query, Response, Depends, status 
 from query_service.ticket import search
 from sqlalchemy.orm import Session
 from depends import get_db
-from dto import TicketRequest, TicketResponse
+from dto import BaseTicket, TicketResponse
 
 router = APIRouter()
 
@@ -12,19 +13,17 @@ async def show(db: Session = Depends(get_db)):
     response = search(db)
     return response
 
-@router.get("/{ticket_id}/")
-async def pick(ticket_id: int, ticket: TicketRequest):
-    query_items = { "q": ticket }
-    return query_items
+@router.get("/{ticket_id}/", response_model=TicketResponse)
+async def pick(ticket_id: int) -> BaseTicket:
+    return TicketResponse(id=ticket_id, title='title')
 
-@router.put("/{ticket_id}")
-async def update(ticket_id: int, request: TicketRequest):
+@router.put("/{ticket_id}", response_model=None)
+async def update(ticket_id: int, request: BaseTicket):
     return { "ticket_id": ticket_id, "request": request}
 
-@router.post("/")
-async def create(request: TicketRequest):
-    dic = request.model_dump()
-    return dic
+@router.post("/", response_model=TicketResponse)
+async def create(request: BaseTicket) -> Any:
+    return request
 
 @router.delete("/{ticket_id}/")
 async def delete(ticket_id):
