@@ -1,7 +1,6 @@
 from typing import Annotated, Any, List, Union
 from MySQLdb import Time
 from fastapi import APIRouter, Path, Query, Response, Depends, status 
-from query_service.ticket import search
 from sqlalchemy.orm import Session
 from depends import get_db
 from dto import BaseTicket, TicketResponse
@@ -10,8 +9,7 @@ router = APIRouter()
 
 @router.get("/",response_model=List[TicketResponse])
 async def show(db: Session = Depends(get_db)):
-    response = search(db)
-    return response
+    return "test"
 
 @router.get("/{ticket_id}/", response_model=TicketResponse)
 async def pick(ticket_id: int) -> BaseTicket:

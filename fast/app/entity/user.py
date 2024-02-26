@@ -1,7 +1,10 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
-app = FastAPI()
+class BaseUser(BaseModel):
+    name: str
+    email: str
+    deleted: bool = False
 
 class UserRequest(BaseModel):
     id: int
