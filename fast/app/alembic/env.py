@@ -4,8 +4,10 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-import database # 追加
+from database import Base # 追加
 import settings
+
+from models import User # models の定義を import しないと alembic ファイルに反映されない
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DB_URL)  # 追加
@@ -13,7 +15,7 @@ config.set_main_option("sqlalchemy.url", settings.DB_URL)  # 追加
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = database.Base.metadata
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
