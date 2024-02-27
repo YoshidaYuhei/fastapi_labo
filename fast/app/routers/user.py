@@ -1,20 +1,13 @@
-from fastapi import APIRouter, Response, status
-
-# from entity import UserRequest
+from typing import Annotated
+from fastapi import APIRouter, Depends, Response, status
+from depends import get_db
+from sqlalchemy.orm import Session
+from entity import UserCreateIn
+from repository import create as repo_create
 
 router = APIRouter()
 
-
-# @router.get("/profile", response_model=UserOut)
-# async def get_profile(email: str, password: str):
-#   user = {
-#       "id": 1,
-#       "name": "John Doe",
-#       "email": "email",
-#       "password": "password"
-#   }
-#   return entity
-
-# @router.put("/profile", response_model=)
-# async def update_profle():
-#     return Response(status_code=status.HTTP_200_OK)
+@router.post("/", response_model=None)
+async def create(request: UserCreateIn, db: Annotated[Session, Depends(get_db)]):
+    repo_create(request, db)
+    return True

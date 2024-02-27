@@ -1,8 +1,8 @@
 from collections.abc import Generator
-
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
+from faker import Faker
 
 from database import engine
 from main import app
@@ -21,3 +21,7 @@ def db() -> Generator:
 def client() -> Generator:
     with TestClient(app) as c:
         yield c
+
+@pytest.fixture(scope="module")
+def fake():
+    return Faker()
