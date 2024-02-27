@@ -1,2 +1,1 @@
-from .ticket import BaseTicket
-from .ticket import TicketResponse
+from .ticket import TicketOut

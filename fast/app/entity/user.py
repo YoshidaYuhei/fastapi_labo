@@ -1,13 +1,9 @@
-from fastapi import FastAPI
-from pydantic import BaseModel, EmailStr
+from entity.abstract import BaseEntity
 
-class BaseUser(BaseModel):
+class BaseUser(BaseEntity):
     name: str
     email: str
     deleted: bool = False
 
-class UserRequest(BaseModel):
-    id: int
-    name: str
-    email: str
-    password: str
+class UserCreateIn(BaseUser):
+    pass

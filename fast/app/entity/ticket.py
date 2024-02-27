@@ -4,26 +4,20 @@ from fastapi import Query
 
 from pydantic import Field
 
-from dto.abstract import BaseDto
+from entity.abstract import BaseEntity
 
-class TicketOption(BaseDto):
-    id: int
+class TicketOption(BaseEntity):
     ticket_id: int
     descirption: Union[str, None] = None
     price: int = Field(gt=0)
 
-class BaseTicket(BaseDto):
-    id: int
+class BaseTicket(BaseEntity):
     title: str
     description: Union[str, None] = Field(
         default=None, title="The description of the ticket", max_length=300
     )
     price: float = Field(gt=0, default=0, examples=[200, 100], description="The price must be greater than zero")
-    options: Union[list[TicketOption], None] = None
     
-class TicketOut(BaseTicket):
+class TicketCreateIn(BaseTicket):
     created_at: Union[datetime.datetime, None] = datetime.datetime.utcnow()
     updated_at: Union[datetime.datetime, None] = datetime.datetime.utcnow()
-
-class TicketIn(BaseTicket):
-    pass
