@@ -6,9 +6,9 @@ from sqlalchemy import exc
 from sqlalchemy import event
 from sqlalchemy.pool import Pool
 
-import settings
+from settings import DB_URL
 
-engine = create_engine(settings.DB_URL, echo=settings.DB_SQL_DEBUG, pool_size=10, max_overflow=20, pool_pre_ping=True, pool_recycle=-1)
+engine = create_engine(DB_URL, pool_size=10, max_overflow=20, pool_pre_ping=True, pool_recycle=-1)
 current_sessionmaker = sessionmaker(
     autocommit=False,
     autoflush=False,

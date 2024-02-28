@@ -1,20 +1,11 @@
-from fastapi import APIRouter, Response, status
-
-from entity import UserRequest
+from fastapi import APIRouter, Depends
+from depends.di_container import user_repository
+from entity.user import UserSignUpIn
+from repository.user import UserRepository
 
 router = APIRouter()
 
-
-# @router.get("/profile", response_model=UserOut)
-# async def get_profile(email: str, password: str):
-#   user = {
-#       "id": 1,
-#       "name": "John Doe",
-#       "email": "email",
-#       "password": "password"
-#   }
-#   return entity
-
-# @router.put("/profile", response_model=)
-# async def update_profle():
-#     return Response(status_code=status.HTTP_200_OK)
+@router.post("/signup", response_model=None)
+async def signup(request: UserSignUpIn, user_repo: UserRepository = Depends(user_repository)):
+    user_repo.sign_up(request)
+    return True

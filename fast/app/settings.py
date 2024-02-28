@@ -9,7 +9,6 @@ SECRET_KEY = os.getenv('APP_ENV', 'develop')
 ALGORITHM = os.getenv('APP_ENV', 'develop')
 ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('APP_ENV', 'develop')
 
-
 DB_NAME = os.getenv('DB_NAME', 'develop')
 DB_USER = os.getenv('DB_USER', 'develop')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'develop')

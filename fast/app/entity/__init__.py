@@ -1,1 +1,1 @@
-from .user import UserRequest
+from .ticket import TicketCreateIn

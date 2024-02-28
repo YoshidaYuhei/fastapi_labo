@@ -1,9 +1,10 @@
+from collections.abc import Generator
 from sqlalchemy.orm import scoped_session
 
 from database import current_sessionmaker
 
 
-def get_db():
+def get_db() -> Generator:
     db = scoped_session(current_sessionmaker)()
     try:
         yield db
