@@ -2,7 +2,7 @@ from typing import Annotated, Any, List, Union
 from MySQLdb import Time
 from fastapi import APIRouter, Path, Query, Response, Depends, status 
 from sqlalchemy.orm import Session
-from depends import get_db
+from depends.get_db import get_db
 from dto import TicketOut
 from entity import TicketCreateIn
 

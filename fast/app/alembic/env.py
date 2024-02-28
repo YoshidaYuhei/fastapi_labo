@@ -7,7 +7,7 @@ from alembic import context
 from database import Base # 追加
 import settings
 
-from models import User # models の定義を import しないと alembic ファイルに反映されない
+from models.user import User # models の定義を import しないと alembic ファイルに反映されない
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DB_URL)  # 追加
