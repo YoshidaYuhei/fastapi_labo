@@ -21,6 +21,6 @@ app.add_middleware(
 # Routers
 ############################################################
 app.include_router(system.router, tags=["システム"], prefix='/system')
-# app.include_router(auth.router, tags=["認証"], prefix='/auth')
+app.include_router(auth.router, tags=["認証"], prefix='/auth')
 app.include_router(user.router, tags=["ユーザー"], prefix='/user')
 # app.include_router(ticket.router, tags=["チケット"], prefix='/ticket')

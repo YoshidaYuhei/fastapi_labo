@@ -1,7 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 from sqlalchemy import exc
 from sqlalchemy import event
 from sqlalchemy.pool import Pool

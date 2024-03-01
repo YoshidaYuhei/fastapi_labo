@@ -9,3 +9,5 @@ pymysql
 mysqlclient
 httpx
 faker
+python-multipart
+pytest

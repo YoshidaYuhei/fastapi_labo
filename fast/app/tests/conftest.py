@@ -1,8 +1,9 @@
-from collections.abc import Generator
+import warnings
 import pytest
+from faker import Faker
+from collections.abc import Generator
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
-from faker import Faker
 
 from database import engine
 from main import app
