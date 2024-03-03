@@ -26,6 +26,15 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - backend
+  react:
+    build: ./react-app/.
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./react-app:/app
+      - /app/node_modules
+    networks:
+      - backend
 
 volumes:
   db-data:
