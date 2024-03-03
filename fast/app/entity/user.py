@@ -19,6 +19,10 @@ class UserSignUpIn(BaseEntity):
     # def email_exists(cls, v, user_repo=Depends(user_repository)):
     #     return user_repo.is_email_exists(v)
 
+class UserLoginIn(BaseEntity):
+    email: str
+    password: str
+
 class UserSignUpInDB(BaseEntity):
     email: str
     encripted_password: str

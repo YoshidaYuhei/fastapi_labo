@@ -14,6 +14,11 @@ class UserRepository(BaseRepository):
         self.db.commit()
         return True
 
+    def validate_password(self, email: str, password: str):
+        encripted_password = hashlib.sha256(password.encode()).hexdigest()
+        user = self.db.query(User).filter(User.email == email).first()
+        return user.encripted_password == encripted_password
+
     def is_email_exists(self, email: str) -> bool:
         if self.db.query(User).filter(User.email == email).first():
             return True
