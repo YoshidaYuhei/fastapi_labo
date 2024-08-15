@@ -12,3 +12,4 @@ faker
 python-multipart
 pytest
 pandas
+keras
